@@ -20,9 +20,26 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <org.laluna.clock.Clock
-        android:id="@+id/clock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <org.laluna.clock.view.EasyHourView
+            android:id="@+id/easyHourView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <org.laluna.clock.view.EasyMinutesView
+            android:id="@+id/easyMinutesView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            app:layout_anchor="@+id/relativeLayout"/>
+    </LinearLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

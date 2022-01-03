@@ -1,4 +1,4 @@
-package org.laluna.clock;
+package org.laluna.clock.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -99,6 +99,14 @@ public class EasyClockView extends View {
             double angle = Math.PI / 30 * (number - 15);
             int x = (int) (width / 2 + Math.cos(angle) * radius - rect.width() / 2);
             int y = (int) (height / 2 + Math.sin(angle) * radius + rect.height() / 2);
+            canvas.drawText(tmp, x, y, paint);
+        }
+        for (int number : numbers) {
+            String tmp = String.valueOf(number);
+            paint.getTextBounds(tmp, 0, tmp.length(), rect);
+            double angle = Math.PI / 6 * (number - 3);
+            int x = (int) (width / 2 + Math.cos(angle) * .9 * radius - rect.width() / 2);
+            int y = (int) (height / 2 + Math.sin(angle) * .9 * radius + rect.height() / 2);
             canvas.drawText(tmp, x, y, paint);
         }
     }

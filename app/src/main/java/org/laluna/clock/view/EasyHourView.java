@@ -2,10 +2,13 @@ package org.laluna.clock.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.core.graphics.ColorUtils;
 
 import org.laluna.clock.R;
 import org.laluna.clock.model.HourModel;
@@ -44,6 +47,7 @@ public class EasyHourView extends View {
         if (!isInit) {
             initClock();
         }
+        canvas.drawColor(getBgColor());
         hourModel.reset();
         drawLiteralHour(canvas);
         drawHourBoxes(canvas);
@@ -59,9 +63,9 @@ public class EasyHourView extends View {
         hourModel = new HourModel(Locale.ITALY);
         height = getHeight();
         width = getWidth();
-        fontSizeSmall = height / 18;
-        fontSizeNormal = fontSizeSmall * 4;
-        fontSizeBig = fontSizeSmall * 6;
+        fontSizeSmall = height / 10;
+        fontSizeNormal = (int) (fontSizeSmall * 2.5);
+        fontSizeBig = (int) (fontSizeSmall * 3.5);
         paint = new Paint();
         isInit = true;
     }
@@ -73,7 +77,7 @@ public class EasyHourView extends View {
      */
     private void drawLiteralHour(Canvas canvas) {
         // TODO colors
-        paint.setColor(getTextColor());
+        paint.setColor(ColorUtils.blendARGB(getBgColor(), Color.BLACK, 0.7f));
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);
 
@@ -91,7 +95,7 @@ public class EasyHourView extends View {
         int totalWidth = hourRectWidth + hourStringRect.width();
         int center = width / 2;
         int marginLeft = center - totalWidth / 2;
-        float y = (float) (height / 2.9);
+        float y = (float) (height / 3.5);
 
         paint.setTextSize(fontSizeNormal);
         canvas.drawText(hourText, marginLeft, y, paint);
@@ -105,8 +109,8 @@ public class EasyHourView extends View {
      * @param canvas Canvas
      */
     private void drawHourBoxes(Canvas canvas) {
-        float top = (float) (height * 0.45);
-        float rectHeight = (float) (height * 0.5);
+        float top = (float) (height * 0.35);
+        float rectHeight = (float) (height * 0.60);
         float left = (float) (width * 0.05);
         float rectWidth = (float) (width * 0.9);
         int rows = 2;
@@ -119,17 +123,23 @@ public class EasyHourView extends View {
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                drawHourBox(canvas, row * cols + col, col * rWidth, row * rHeight, rHeight, rWidth, top, left, currentHour);
+                drawHourBox(canvas, row * cols + col, col * rWidth, row * rHeight, rHeight, rWidth, top, left, currentHour, row);
             }
         }
     }
 
-    private void drawHourBox(Canvas canvas, int hour, float x, float y, float h, float w, float top, float left, int currentHour) {
-        float padding = w * (float) 0.1;
+    private void drawHourBox(Canvas canvas, int hour, float x, float y, float h, float w, float top, float left, int currentHour, int row) {
+        float padding = w * (float) 0.06;
         float l = left + x + padding;
         float t = top + y + padding;
         float r = left + x + w - padding;
         float b = top + y + h - padding;
+
+        if (row == 0) {
+            t += h / 2.5;
+        } else {
+            b -= h / 2.5;
+        }
 
         paint.setStyle(Paint.Style.FILL);
         if (hour == currentHour) {
@@ -144,6 +154,16 @@ public class EasyHourView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(4);
         canvas.drawRect(l, t, r, b, paint);
+
+        paint.setColor(getTextColor());
+        paint.setStyle(Paint.Style.FILL);
+
+        paint.setTextSize(fontSizeSmall);
+        Rect hourRect = new Rect();
+        String hourText = String.valueOf(hour);
+        paint.getTextBounds(hourText, 0, hourText.length(), hourRect);
+        float b1 = row == 0 ? (float) (b - (h / 1.6)) : (float) (b + (h / 2.8));
+        canvas.drawText(hourText, l + (r - l - hourRect.width()) / 2, b1, paint);
     }
 
     private int getCurrentHourColor() {
@@ -160,5 +180,9 @@ public class EasyHourView extends View {
 
     private int getTextColor() {
         return getResources().getColor(R.color.text_bounds_color, getContext().getTheme());
+    }
+
+    private int getBgColor() {
+        return getResources().getColor(R.color.bg, getContext().getTheme());
     }
 }

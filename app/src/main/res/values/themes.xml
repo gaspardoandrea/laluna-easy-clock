@@ -14,6 +14,4 @@
     <style name="Theme.EasyToReadClock.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.EasyToReadClock.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="Theme.EasyToReadClock.AppWidgetContainer" parent="Theme.EasyToReadClock.AppWidgetContainerParent" />
 </resources>

@@ -1,8 +1,9 @@
-<PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        app:title="@string/messages_header">
+        app:title="@string/messages_header"
+        app:isPreferenceVisible="false">
 
         <EditTextPreference
             app:key="signature"
@@ -20,19 +21,27 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:title="@string/sync_header">
-
+        app:key="minutes"
+        app:title="@string/settingsMinutes">
         <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title"/>
-
+            app:key="showMinutes"
+            app:title="@string/show"
+            app:summaryOn="@string/minutesShowOn"
+            app:summaryOff="@string/minutesShowOff"
+            android:defaultValue="true"/>
         <SwitchPreferenceCompat
-            app:key="attachment"
-            app:title="@string/attachment_title"
-            app:summaryOn="@string/attachment_summary_on"
-            app:summaryOff="@string/attachment_summary_off"
-            app:dependency="sync"/>
-
+            app:key="showQuadrants"
+            app:title="@string/showQuadrants"
+            app:summaryOn="@string/quadrantsShowOn"
+            app:summaryOff="@string/quadrantsShowOff"
+            android:defaultValue="true"
+            android:dependency="showMinutes"/>
+        <SwitchPreferenceCompat
+            app:key="showMinutesNumber"
+            app:title="@string/showMinutesNumber"
+            app:summaryOn="@string/showMinutesNumberOn"
+            app:summaryOff="@string/showMinutesNumberOff"
+            android:defaultValue="true"
+            android:dependency="showMinutes"/>
     </PreferenceCategory>
-
 </PreferenceScreen>

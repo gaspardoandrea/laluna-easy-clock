@@ -19,4 +19,14 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="settingsMinutes">Riquadro dei minuti</string>
+    <string name="show">Visibile</string>
+    <string name="showQuadrants">Mostra quadranti</string>
+    <string name="minutesShowOn">Il riquadro dei minuti viene mostrato</string>
+    <string name="minutesShowOff">Il riquadro dei minuti non viene mostrato</string>
+    <string name="quadrantsShowOn">Il riquadro dei minuti viene diviso in quattro</string>
+    <string name="quadrantsShowOff">Il riquadro dei minuti non viene diviso</string>
+    <string name="showMinutesNumber">Mostra numero dei minuti</string>
+    <string name="showMinutesNumberOn">I minuti vengono mostrati attorno al quadrante</string>
+    <string name="showMinutesNumberOff">Nessun minuto attorno al quadrante</string>
 </resources>

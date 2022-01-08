@@ -1,6 +1,7 @@
 package it.andreagaspardo.clock.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -31,6 +32,7 @@ public class EasyMinutesView extends View {
     private int fontSizeBig;
     private int fontSizeSmall;
     private HourModel hourModel;
+    private SharedPreferences preferences;
 
     public EasyMinutesView(Context context) {
         super(context);
@@ -56,8 +58,12 @@ public class EasyMinutesView extends View {
 
         drawCircle(canvas);
         drawHands(canvas);
-        drawQuadrants(canvas);
-        drawNumeral(canvas);
+        if (preferences.getBoolean("showQuadrants", true)) {
+            drawQuadrants(canvas);
+        }
+        if (preferences.getBoolean("showMinutesNumber", true)) {
+            drawNumeral(canvas);
+        }
         drawHourText(canvas);
 
         postInvalidateDelayed(30 * 1000);
@@ -151,6 +157,8 @@ public class EasyMinutesView extends View {
     }
 
     private void initClock() {
+        preferences = getContext().getSharedPreferences(getContext().getPackageName() + "_preferences", Context.MODE_PRIVATE);
+
         hourModel = new HourModel(Locale.ITALY);
 
         height = getHeight();

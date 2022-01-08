@@ -4,40 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="it.andreagaspardo.clock.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.LalunaClock.AppBarOverlay">
+        android:theme="@style/Theme.EasyToReadClock.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.LalunaClock.PopupOverlay" />
+            app:popupTheme="@style/Theme.EasyToReadClock.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/relativeLayout"
+        android:background="@color/bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="?attr/actionBarSize">
 
-        <org.laluna.clock.view.EasyHourView
-            android:id="@+id/easyHourView"
-            android:layout_width="wrap_content"
+        <it.andreagaspardo.clock.view.EasyHourTextView
+            android:id="@+id/easyHourTextView"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1" >
 
-        <org.laluna.clock.view.EasyMinutesView
-            android:id="@+id/easyMinutesView"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textViewHourLabel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:textSize="50sp"
+                android:textAlignment="textEnd"
+                android:text="@string/hour" />
+            <TextView
+                android:id="@+id/textViewHourText"
+                android:layout_width="0dp"
+                android:textSize="50sp"
+                android:layout_marginStart="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </it.andreagaspardo.clock.view.EasyHourTextView>
+
+        <it.andreagaspardo.clock.view.EasyHourView
+            android:id="@+id/easyHourView"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="2" />
+
+        <it.andreagaspardo.clock.view.EasyMinutesView
+            android:id="@+id/easyMinutesView"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
             app:layout_anchor="@+id/relativeLayout"/>
     </LinearLayout>
 

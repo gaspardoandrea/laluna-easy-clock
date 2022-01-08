@@ -1,4 +1,4 @@
-package org.laluna.clock;
+package it.andreagaspardo.clock;
 
 import org.junit.Test;
 

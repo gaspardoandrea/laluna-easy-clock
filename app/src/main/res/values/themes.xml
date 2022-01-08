@@ -15,11 +15,5 @@
 
     <style name="Theme.EasyToReadClock.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Theme.EasyToReadClock.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
-        <item name="appWidgetRadius">8dp</item>
-        <item name="appWidgetPadding">4dp</item>
-        <item name="appWidgetInnerRadius">4dp</item>
-    </style>
-
     <style name="Theme.EasyToReadClock.AppWidgetContainer" parent="Theme.EasyToReadClock.AppWidgetContainerParent" />
 </resources>

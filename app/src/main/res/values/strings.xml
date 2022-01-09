@@ -1,32 +1,25 @@
 <resources>
-    <string name="app_name">Easy to read clock</string>
-    <string name="action_settings">Settings</string>
-    <string name="hour">ORE</string>
-    <string name="minutes">MINUTI</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="app_name">Che ore sono?</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="hour">Ore</string>
+    <string name="minutes">Minuti</string>
+    <string name="title_activity_settings">Impostazioni</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="settingsMinutes">Riquadro dei minuti</string>
-    <string name="show">Visibile</string>
-    <string name="showQuadrants">Mostra quadranti</string>
-    <string name="minutesShowOn">Il riquadro dei minuti viene mostrato</string>
-    <string name="minutesShowOff">Il riquadro dei minuti non viene mostrato</string>
-    <string name="quadrantsShowOn">Il riquadro dei minuti viene diviso in quattro</string>
-    <string name="quadrantsShowOff">Il riquadro dei minuti non viene diviso</string>
-    <string name="showMinutesNumber">Mostra numero dei minuti</string>
-    <string name="showMinutesNumberOn">I minuti vengono mostrati attorno al quadrante</string>
-    <string name="showMinutesNumberOff">Nessun minuto attorno al quadrante</string>
+    <string name="settings_minutes">Riquadro dei minuti</string>
+    <string name="show_minutes">Visibile</string>
+    <string name="show_quadrants">Mostra quadranti</string>
+    <string name="show_minutes_on">Il riquadro dei minuti viene mostrato</string>
+    <string name="show_minutes_off">Il riquadro dei minuti non viene mostrato</string>
+    <string name="show_quadrants_on">Il riquadro dei minuti viene diviso in quattro</string>
+    <string name="show_quadrants_off">Il riquadro dei minuti non viene diviso</string>
+    <string name="show_minutes_number">Mostra numero dei minuti</string>
+    <string name="show_minutes_number_on">I minuti vengono mostrati attorno al quadrante</string>
+    <string name="show_minutes_number_off">Nessun minuto attorno al quadrante</string>
+    <string name="my_day">La mia giornata</string>
+    <string name="wake_up">Mi sveglio alle</string>
+    <string name="launch">Pranzo alle</string>
+    <string name="dinner">Ceno alle</string>
+    <string name="bedtime">Vado a dormire alle</string>
+    <string name="action_exit">Esci</string>
 </resources>

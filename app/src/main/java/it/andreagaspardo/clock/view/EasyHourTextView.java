@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import it.andreagaspardo.clock.model.Helper;
 import it.andreagaspardo.clock.model.HourModel;
 
 public class EasyHourTextView extends LinearLayout {
@@ -36,8 +37,7 @@ public class EasyHourTextView extends LinearLayout {
     }
 
     private void initTimer() {
-        // TODO
-        hourModel = new HourModel(Locale.ITALY);
+        hourModel = new HourModel(Helper.getCurrentLocale(getContext()));
         updateHour();
         timer.schedule(new TimerTask() {
             @Override

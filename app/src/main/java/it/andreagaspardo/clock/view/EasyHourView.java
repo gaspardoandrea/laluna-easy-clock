@@ -10,12 +10,15 @@ import android.view.View;
 import androidx.core.graphics.ColorUtils;
 
 import it.andreagaspardo.clock.R;
+import it.andreagaspardo.clock.model.Helper;
 import it.andreagaspardo.clock.model.HourModel;
 
 import java.util.Locale;
 
 /**
- * TODO: document your custom view class.
+ * Old hour view.
+ *
+ * @deprecated
  */
 public class EasyHourView extends View {
     private boolean isInit;
@@ -55,8 +58,7 @@ public class EasyHourView extends View {
      * Init clock.
      */
     private void initClock() {
-        // TODO
-        hourModel = new HourModel(Locale.ITALY);
+        hourModel = new HourModel(Helper.getCurrentLocale(getContext()));
         height = getHeight();
         width = getWidth();
         fontSizeSmall = height / 10;

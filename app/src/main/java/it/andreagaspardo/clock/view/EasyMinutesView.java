@@ -19,7 +19,7 @@ import it.andreagaspardo.clock.model.HourModel;
 import java.util.Locale;
 
 /**
- * TODO: document your custom view class.
+ * Minutes view.
  */
 public class EasyMinutesView extends View {
     private int height, width = 0;
@@ -58,20 +58,22 @@ public class EasyMinutesView extends View {
 
         drawCircle(canvas);
         drawHands(canvas);
-        if (preferences.getBoolean("showQuadrants", true)) {
+        if (preferences.getBoolean("show_quadrants", true)) {
             drawQuadrants(canvas);
         }
-        if (preferences.getBoolean("showMinutesNumber", true)) {
+        if (preferences.getBoolean("show_minutes", true)) {
             drawNumeral(canvas);
         }
-        drawHourText(canvas);
+        if (preferences.getBoolean("show_minutes_number", true)) {
+            drawHourText(canvas);
+        }
 
         postInvalidateDelayed(30 * 1000);
         invalidate();
     }
 
     private void drawHand(Canvas canvas, int loc) {
-        double angle = 180 * (float)loc / 30 - Math.PI / 2;
+        double angle = 180 * (float) loc / 30 - Math.PI / 2;
 
         paint.setStyle(Paint.Style.FILL);
         float r = (float) (radius * .9);
@@ -103,15 +105,15 @@ public class EasyMinutesView extends View {
         String hourText = hourModel.getMinutesAsString();
         paint.getTextBounds(hourText, 0, hourText.length(), hourRect);
         canvas.drawText(hourText,
-                (int)(width / 2 - hourRect.width() / 2),
-                (int)(height / 2.3 + hourRect.height() / 2), paint);
+                (int) (width / 2 - hourRect.width() / 2),
+                (int) (height / 2.3 + hourRect.height() / 2), paint);
 
         paint.setTextSize(fontSizeSmall);
         String minutesText = getResources().getText(R.string.minutes).toString();
         paint.getTextBounds(minutesText, 0, minutesText.length(), hourRect);
         canvas.drawText(minutesText,
-                (int)(width / 2 - hourRect.width() / 2),
-                (int)(height / 1.8 + hourRect.height()), paint);
+                (int) (width / 2 - hourRect.width() / 2),
+                (int) (height / 1.8 + hourRect.height()), paint);
     }
 
     private void drawHands(Canvas canvas) {
@@ -123,8 +125,8 @@ public class EasyMinutesView extends View {
         paint.setStrokeWidth(3);
         paint.setColor(ColorUtils.blendARGB(getBgColor(), Color.BLACK, 0.4f));
         float r = (float) (radius * .85);
-        float cX = (float)width / 2;
-        float cY = (float)height / 2;
+        float cX = (float) width / 2;
+        float cY = (float) height / 2;
         canvas.drawLine(cX - r, cY, cX + r, cY, paint);
         canvas.drawLine(cX, cY - r, cX, cY + r, paint);
     }

@@ -12,7 +12,9 @@ import android.view.View;
 import java.util.Calendar;
 
 /**
- * TODO: document your custom view class.
+ * Example view for a clock.
+ *
+ * @deprecated
  */
 public class EasyClockView extends View {
     private int height, width = 0;

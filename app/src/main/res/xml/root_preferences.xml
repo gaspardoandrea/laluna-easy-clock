@@ -2,46 +2,61 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        app:title="@string/messages_header"
-        app:isPreferenceVisible="false">
-
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true"/>
-
+        app:key="my_day"
+        app:title="@string/my_day">
         <ListPreference
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:defaultValue="reply"
+            app:key="wake_up"
+            app:title="@string/wake_up"
+            app:entries="@array/wake_up"
+            app:entryValues="@array/wake_up"
+            app:defaultValue="7"
+            app:useSimpleSummaryProvider="true"/>
+        <ListPreference
+            app:key="launch"
+            app:title="@string/launch"
+            app:entries="@array/launch"
+            app:entryValues="@array/launch"
+            app:defaultValue="12"
+            app:useSimpleSummaryProvider="true"/>
+        <ListPreference
+            app:key="dinner"
+            app:title="@string/dinner"
+            app:entries="@array/dinner"
+            app:entryValues="@array/dinner"
+            app:defaultValue="19"
+            app:useSimpleSummaryProvider="true"/>
+        <ListPreference
+            app:key="bedtime"
+            app:title="@string/bedtime"
+            app:entries="@array/bedtime"
+            app:entryValues="@array/bedtime"
+            app:defaultValue="21"
             app:useSimpleSummaryProvider="true"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
         app:key="minutes"
-        app:title="@string/settingsMinutes">
+        app:title="@string/settings_minutes">
         <SwitchPreferenceCompat
-            app:key="showMinutes"
-            app:title="@string/show"
-            app:summaryOn="@string/minutesShowOn"
-            app:summaryOff="@string/minutesShowOff"
+            app:key="show_minutes"
+            app:title="@string/show_minutes"
+            app:summaryOn="@string/show_minutes_on"
+            app:summaryOff="@string/show_minutes_off"
             android:defaultValue="true"/>
         <SwitchPreferenceCompat
-            app:key="showQuadrants"
-            app:title="@string/showQuadrants"
-            app:summaryOn="@string/quadrantsShowOn"
-            app:summaryOff="@string/quadrantsShowOff"
+            app:key="show_quadrants"
+            app:title="@string/show_quadrants"
+            app:summaryOn="@string/show_quadrants_on"
+            app:summaryOff="@string/show_quadrants_off"
             android:defaultValue="true"
-            android:dependency="showMinutes"/>
+            android:dependency="show_minutes" />
         <SwitchPreferenceCompat
-            app:key="showMinutesNumber"
-            app:title="@string/showMinutesNumber"
-            app:summaryOn="@string/showMinutesNumberOn"
-            app:summaryOff="@string/showMinutesNumberOff"
+            app:key="show_minutes_number"
+            app:title="@string/show_minutes_number"
+            app:summaryOn="@string/show_minutes_number_on"
+            app:summaryOff="@string/show_minutes_number_off"
             android:defaultValue="true"
-            android:dependency="showMinutes"/>
+            android:dependency="show_minutes"/>
     </PreferenceCategory>
 </PreferenceScreen>

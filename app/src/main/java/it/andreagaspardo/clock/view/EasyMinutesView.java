@@ -47,6 +47,15 @@ public class EasyMinutesView extends View {
     }
 
     @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        preferences = getContext().getSharedPreferences(getContext().getPackageName() + "_preferences", Context.MODE_PRIVATE);
+        if (!preferences.getBoolean("show_minutes_component", true)) {
+            setVisibility(INVISIBLE);
+        }
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
@@ -159,8 +168,6 @@ public class EasyMinutesView extends View {
     }
 
     private void initClock() {
-        preferences = getContext().getSharedPreferences(getContext().getPackageName() + "_preferences", Context.MODE_PRIVATE);
-
         hourModel = new HourModel(Locale.ITALY);
 
         height = getHeight();

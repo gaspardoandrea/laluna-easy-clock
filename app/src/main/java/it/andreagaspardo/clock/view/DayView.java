@@ -108,12 +108,9 @@ public class DayView extends GridLayout {
     }
 
     @Override
-    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
-        if (visibility == View.VISIBLE) {
-            addChildren();
-        }
-
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        addChildren();
     }
 
     private void addMorningComponents() {

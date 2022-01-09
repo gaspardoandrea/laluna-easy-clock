@@ -7,10 +7,10 @@
 
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="settings_minutes">Riquadro dei minuti</string>
-    <string name="show_minutes">Visibile</string>
+    <string name="show_minutes">Mostra minuti attorno al riquadro</string>
     <string name="show_quadrants">Mostra quadranti</string>
-    <string name="show_minutes_on">Il riquadro dei minuti viene mostrato</string>
-    <string name="show_minutes_off">Il riquadro dei minuti non viene mostrato</string>
+    <string name="show_minutes_on">I minuti vengono mostrati</string>
+    <string name="show_minutes_off">I minuti non vengono mostrati</string>
     <string name="show_quadrants_on">Il riquadro dei minuti viene diviso in quattro</string>
     <string name="show_quadrants_off">Il riquadro dei minuti non viene diviso</string>
     <string name="show_minutes_number">Mostra numero dei minuti</string>
@@ -22,4 +22,7 @@
     <string name="dinner">Ceno alle</string>
     <string name="bedtime">Vado a dormire alle</string>
     <string name="action_exit">Esci</string>
+    <string name="show_minutes_component">Riquadro minuti</string>
+    <string name="show_minutes_component_off">Nascondi riquadro minuti</string>
+    <string name="show_minutes_component_on">Mostra riquadro minuti</string>
 </resources>

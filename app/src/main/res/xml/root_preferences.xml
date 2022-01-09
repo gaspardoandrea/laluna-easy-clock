@@ -1,37 +1,37 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         app:key="my_day"
         app:title="@string/my_day">
         <ListPreference
-            app:key="wake_up"
-            app:title="@string/wake_up"
+            app:defaultValue="7"
             app:entries="@array/wake_up"
             app:entryValues="@array/wake_up"
-            app:defaultValue="7"
-            app:useSimpleSummaryProvider="true"/>
+            app:key="wake_up"
+            app:title="@string/wake_up"
+            app:useSimpleSummaryProvider="true" />
         <ListPreference
-            app:key="launch"
-            app:title="@string/launch"
+            app:defaultValue="12"
             app:entries="@array/launch"
             app:entryValues="@array/launch"
-            app:defaultValue="12"
-            app:useSimpleSummaryProvider="true"/>
+            app:key="launch"
+            app:title="@string/launch"
+            app:useSimpleSummaryProvider="true" />
         <ListPreference
-            app:key="dinner"
-            app:title="@string/dinner"
+            app:defaultValue="19"
             app:entries="@array/dinner"
             app:entryValues="@array/dinner"
-            app:defaultValue="19"
-            app:useSimpleSummaryProvider="true"/>
+            app:key="dinner"
+            app:title="@string/dinner"
+            app:useSimpleSummaryProvider="true" />
         <ListPreference
-            app:key="bedtime"
-            app:title="@string/bedtime"
+            app:defaultValue="21"
             app:entries="@array/bedtime"
             app:entryValues="@array/bedtime"
-            app:defaultValue="21"
-            app:useSimpleSummaryProvider="true"/>
+            app:key="bedtime"
+            app:title="@string/bedtime"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 
@@ -39,24 +39,31 @@
         app:key="minutes"
         app:title="@string/settings_minutes">
         <SwitchPreferenceCompat
+            android:defaultValue="true"
+            app:key="show_minutes_component"
+            app:summaryOff="@string/show_minutes_component_off"
+            app:summaryOn="@string/show_minutes_component_on"
+            app:title="@string/show_minutes_component" />
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:dependency="show_minutes_component"
             app:key="show_minutes"
-            app:title="@string/show_minutes"
-            app:summaryOn="@string/show_minutes_on"
             app:summaryOff="@string/show_minutes_off"
-            android:defaultValue="true"/>
+            app:summaryOn="@string/show_minutes_on"
+            app:title="@string/show_minutes" />
         <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:dependency="show_minutes_component"
             app:key="show_quadrants"
-            app:title="@string/show_quadrants"
-            app:summaryOn="@string/show_quadrants_on"
             app:summaryOff="@string/show_quadrants_off"
-            android:defaultValue="true"
-            android:dependency="show_minutes" />
+            app:summaryOn="@string/show_quadrants_on"
+            app:title="@string/show_quadrants" />
         <SwitchPreferenceCompat
-            app:key="show_minutes_number"
-            app:title="@string/show_minutes_number"
-            app:summaryOn="@string/show_minutes_number_on"
-            app:summaryOff="@string/show_minutes_number_off"
             android:defaultValue="true"
-            android:dependency="show_minutes"/>
+            android:dependency="show_minutes_component"
+            app:key="show_minutes_number"
+            app:summaryOff="@string/show_minutes_number_off"
+            app:summaryOn="@string/show_minutes_number_on"
+            app:title="@string/show_minutes_number" />
     </PreferenceCategory>
 </PreferenceScreen>

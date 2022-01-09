@@ -9,9 +9,13 @@
     <style name="Theme.EasyToReadClock.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:actionMenuTextColor" tools:targetApi="l">@color/bg</item>
     </style>
 
     <style name="Theme.EasyToReadClock.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.EasyToReadClock.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.EasyToReadClock.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:actionMenuTextColor" tools:targetApi="l">@color/bg</item>
+    </style>
+
 </resources>

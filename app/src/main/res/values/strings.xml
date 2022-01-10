@@ -25,4 +25,9 @@
     <string name="show_minutes_component">Riquadro minuti</string>
     <string name="show_minutes_component_off">Nascondi riquadro minuti</string>
     <string name="show_minutes_component_on">Mostra riquadro minuti</string>
+    <string name="uppercase">Testo in maiuscolo</string>
+    <string name="uppercase_on">Testo tutto in maiuscolo</string>
+    <string name="uppercase_off">Testo in stampatello</string>
+    <string name="settings_hours">Riquadro delle ore</string>
+    <string name="day_structure">Struttura del riquadro</string>
 </resources>

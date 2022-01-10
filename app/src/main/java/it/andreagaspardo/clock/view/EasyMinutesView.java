@@ -1,7 +1,6 @@
 package it.andreagaspardo.clock.view;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,6 +14,7 @@ import androidx.core.graphics.ColorUtils;
 
 import it.andreagaspardo.clock.R;
 import it.andreagaspardo.clock.model.HourModel;
+import it.andreagaspardo.clock.model.Preferences;
 
 import java.util.Locale;
 
@@ -32,7 +32,7 @@ public class EasyMinutesView extends View {
     private int fontSizeBig;
     private int fontSizeSmall;
     private HourModel hourModel;
-    private SharedPreferences preferences;
+    private Preferences preferences;
 
     public EasyMinutesView(Context context) {
         super(context);
@@ -49,8 +49,8 @@ public class EasyMinutesView extends View {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        preferences = getContext().getSharedPreferences(getContext().getPackageName() + "_preferences", Context.MODE_PRIVATE);
-        if (!preferences.getBoolean("show_minutes_component", true)) {
+        preferences = new Preferences(getContext());
+        if (!preferences.showMinutesComponent()) {
             setVisibility(INVISIBLE);
         }
     }
@@ -67,13 +67,13 @@ public class EasyMinutesView extends View {
 
         drawCircle(canvas);
         drawHands(canvas);
-        if (preferences.getBoolean("show_quadrants", true)) {
+        if (preferences.showQuadrants()) {
             drawQuadrants(canvas);
         }
-        if (preferences.getBoolean("show_minutes", true)) {
+        if (preferences.showMinutes()) {
             drawNumeral(canvas);
         }
-        if (preferences.getBoolean("show_minutes_number", true)) {
+        if (preferences.showMinutesNumber()) {
             drawHourText(canvas);
         }
 
@@ -119,6 +119,9 @@ public class EasyMinutesView extends View {
 
         paint.setTextSize(fontSizeSmall);
         String minutesText = getResources().getText(R.string.minutes).toString();
+        if (preferences.uppercase()) {
+            minutesText = minutesText.toUpperCase();
+        }
         paint.getTextBounds(minutesText, 0, minutesText.length(), hourRect);
         canvas.drawText(minutesText,
                 (int) (width / 2 - hourRect.width() / 2),

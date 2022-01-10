@@ -1,7 +1,6 @@
 package it.andreagaspardo.clock.view;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -10,7 +9,6 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -25,11 +23,12 @@ import java.util.TimerTask;
 import it.andreagaspardo.clock.R;
 import it.andreagaspardo.clock.model.Helper;
 import it.andreagaspardo.clock.model.HourModel;
+import it.andreagaspardo.clock.model.Preferences;
 
 public class DayView extends GridLayout {
     public static final int ICON_SIZE = 110;
     private int row = 0;
-    private SharedPreferences preferences;
+    private Preferences preferences;
     private boolean added = false;
     private final Map<Integer, List<View>> hourElements = new HashMap<>();
     private HourModel hourModel;
@@ -54,12 +53,15 @@ public class DayView extends GridLayout {
         if (added) {
             return;
         }
-        preferences = getContext()
-                .getSharedPreferences(getContext().getPackageName() + "_preferences", Context.MODE_PRIVATE);
-        addMorningComponents();
-        addAfternoonComponents();
-        addEveningComponents();
-        addNightComponents();
+        preferences = new Preferences(getContext());
+        if (preferences.isDayStructureByFour()) {
+
+        } else {
+            addMorningComponents();
+            addAfternoonComponents();
+            addEveningComponents();
+            addNightComponents();
+        }
         initTimer();
         added = true;
     }
@@ -76,7 +78,7 @@ public class DayView extends GridLayout {
     }
 
     private void updateHour() {
-        int start = getHour("wake_up", 7);
+        int start = preferences.getHour("wake_up", 7);
         hourModel.reset();
         for (Map.Entry<Integer, List<View>> entry : hourElements.entrySet()) {
             float f = 1;
@@ -114,29 +116,29 @@ public class DayView extends GridLayout {
     }
 
     private void addMorningComponents() {
-        addRow(getHour("wake_up", 7),
-                getHour("launch", 12),
+        addRow(preferences.getHour("wake_up", 7),
+                preferences.getHour("launch", 12),
                 ResourcesCompat.getDrawable(getResources(), R.drawable.wake_up, getContext().getTheme()),
                 ResourcesCompat.getDrawable(getResources(), R.drawable.launch, getContext().getTheme()));
     }
 
     private void addAfternoonComponents() {
-        addRow(getHour("launch", 12) + 1,
-                getHour("dinner", 19),
+        addRow(preferences.getHour("launch", 12) + 1,
+                preferences.getHour("dinner", 19),
                 ResourcesCompat.getDrawable(getResources(), R.drawable.rest1, getContext().getTheme()),
                 ResourcesCompat.getDrawable(getResources(), R.drawable.dinner, getContext().getTheme()));
     }
 
     private void addEveningComponents() {
-        addRow(getHour("dinner", 19) + 1,
-                getHour("bedtime", 21),
+        addRow(preferences.getHour("dinner", 19) + 1,
+                preferences.getHour("bedtime", 21),
                 ResourcesCompat.getDrawable(getResources(), R.drawable.film, getContext().getTheme()),
                 ResourcesCompat.getDrawable(getResources(), R.drawable.sleep, getContext().getTheme()));
     }
 
     private void addNightComponents() {
-        addRow(getHour("bedtime", 21) + 1,
-                getHour("wake_up", 7) - 1,
+        addRow(preferences.getHour("bedtime", 21) + 1,
+                preferences.getHour("wake_up", 7) - 1,
                 ResourcesCompat.getDrawable(getResources(), R.drawable.night, getContext().getTheme()),
                 ResourcesCompat.getDrawable(getResources(), R.drawable.alba2, getContext().getTheme()));
     }
@@ -195,17 +197,5 @@ public class DayView extends GridLayout {
             hourElements.put(h, new ArrayList<>());
         }
         Objects.requireNonNull(hourElements.get(h)).add(view);
-    }
-
-    /**
-     * Get hour from settings.
-     *
-     * @param settingsKey  String
-     * @param defaultValue int
-     * @return int
-     */
-    private int getHour(String settingsKey, int defaultValue) {
-//        return defaultValue;
-        return Integer.parseInt(preferences.getString(settingsKey, String.valueOf(defaultValue)));
     }
 }

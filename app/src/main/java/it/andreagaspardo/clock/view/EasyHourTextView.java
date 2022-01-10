@@ -13,6 +13,7 @@ import java.util.TimerTask;
 
 import it.andreagaspardo.clock.model.Helper;
 import it.andreagaspardo.clock.model.HourModel;
+import it.andreagaspardo.clock.model.Preferences;
 
 public class EasyHourTextView extends LinearLayout {
     private final Timer timer = new Timer(true);
@@ -45,6 +46,11 @@ public class EasyHourTextView extends LinearLayout {
                 updateHour();
             }
         }, 1000);
+        Preferences preferences = new Preferences(getContext());
+        if (preferences.uppercase()) {
+            TextView tv = (TextView) getChildAt(0);
+            tv.setText(tv.getText().toString().toUpperCase());
+        }
     }
 
     public void updateHour() {

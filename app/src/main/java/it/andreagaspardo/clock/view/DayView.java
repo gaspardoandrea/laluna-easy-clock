@@ -1,16 +1,12 @@
 package it.andreagaspardo.clock.view;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +16,6 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import it.andreagaspardo.clock.R;
 import it.andreagaspardo.clock.model.Helper;
 import it.andreagaspardo.clock.model.HourModel;
 import it.andreagaspardo.clock.model.Preferences;
@@ -30,9 +25,9 @@ public class DayView extends GridLayout {
     private int row = 0;
     private Preferences preferences;
     private boolean added = false;
-    private final Map<Integer, List<View>> hourElements = new HashMap<>();
+    private final Map<Integer, List<DayViewComponent>> hourElements = new HashMap<>();
     private HourModel hourModel;
-    private Timer timer = new Timer();
+    private final Timer timer = new Timer();
 
     public DayView(Context context) {
         super(context);
@@ -55,7 +50,7 @@ public class DayView extends GridLayout {
         }
         preferences = new Preferences(getContext());
         if (preferences.isDayStructureByFour()) {
-
+            addAllComponents();
         } else {
             addMorningComponents();
             addAfternoonComponents();
@@ -78,33 +73,18 @@ public class DayView extends GridLayout {
     }
 
     private void updateHour() {
-        int start = preferences.getHour("wake_up", 7);
+        int start = preferences.getWakeUpTime();
         hourModel.reset();
-        for (Map.Entry<Integer, List<View>> entry : hourElements.entrySet()) {
-            float f = 1;
+        for (Map.Entry<Integer, List<DayViewComponent>> entry : hourElements.entrySet()) {
             int k = entry.getKey();
-            int currentHour = hourModel.getHour();
-            if (currentHour < start) {
-                currentHour += 24;
+            int now = hourModel.getHour();
+            if (now < start) {
+                now += 24;
             }
-            if (k > currentHour) {
-                f = (float) 0.2;
-            }
-            int bg;
-            boolean current = false;
-            if (k == currentHour) {
-                bg = getResources().getColor(R.color.primary, getContext().getTheme());
-                current = true;
-            } else {
-                bg = getResources().getColor(R.color.bg, getContext().getTheme());
-            }
-            for (View v : entry.getValue()) {
-                v.setAlpha(f);
-                v.setBackgroundColor(bg);
-                if (v instanceof TextView) {
-                    ((TextView) v).setTypeface(null,
-                            current ? Typeface.BOLD : Typeface.NORMAL);
-                }
+            boolean isDone = k <= now;
+            boolean current = k == now;
+            for (DayViewComponent v : entry.getValue()) {
+                v.updateStatus(isDone, current);
             }
         }
     }
@@ -116,60 +96,87 @@ public class DayView extends GridLayout {
     }
 
     private void addMorningComponents() {
-        addRow(preferences.getHour("wake_up", 7),
-                preferences.getHour("launch", 12),
-                ResourcesCompat.getDrawable(getResources(), R.drawable.wake_up, getContext().getTheme()),
-                ResourcesCompat.getDrawable(getResources(), R.drawable.launch, getContext().getTheme()));
+        addRow(preferences.getWakeUpTime(),
+                preferences.getLaunchTime(),
+                preferences.getWakeUpIcon(),
+                preferences.getLaunchIcon());
     }
 
     private void addAfternoonComponents() {
-        addRow(preferences.getHour("launch", 12) + 1,
-                preferences.getHour("dinner", 19),
-                ResourcesCompat.getDrawable(getResources(), R.drawable.rest1, getContext().getTheme()),
-                ResourcesCompat.getDrawable(getResources(), R.drawable.dinner, getContext().getTheme()));
+        addRow(preferences.getLaunchTime() + 1,
+                preferences.getDinnerTime(),
+                preferences.getRestIcon(),
+                preferences.getDinnerIcon());
     }
 
     private void addEveningComponents() {
-        addRow(preferences.getHour("dinner", 19) + 1,
-                preferences.getHour("bedtime", 21),
-                ResourcesCompat.getDrawable(getResources(), R.drawable.film, getContext().getTheme()),
-                ResourcesCompat.getDrawable(getResources(), R.drawable.sleep, getContext().getTheme()));
+        addRow(preferences.getDinnerTime() + 1,
+                preferences.getBedTime(),
+                preferences.getEveningIcon(),
+                preferences.getSleepIcon());
     }
 
     private void addNightComponents() {
-        addRow(preferences.getHour("bedtime", 21) + 1,
-                preferences.getHour("wake_up", 7) - 1,
-                ResourcesCompat.getDrawable(getResources(), R.drawable.night, getContext().getTheme()),
-                ResourcesCompat.getDrawable(getResources(), R.drawable.alba2, getContext().getTheme()));
+        addRow(preferences.getBedTime() + 1,
+                preferences.getWakeUpTime() - 1,
+                preferences.getNightIcon(),
+                preferences.getSunriseIcon());
+    }
+
+    private void addAllComponents() {
+        int col = 0;
+        row = 1;
+        for (int hour = 0; hour < 24; hour++) {
+            LayoutParams params = createLayoutParams(col);
+            HourText hourText = new HourText(getContext());
+            hourText.updateText(hour);
+            addView(hourText, params);
+            addHourElement(hourText, hour);
+            if (hour == preferences.getWakeUpTime()) {
+                addIconOverText(col, hour, preferences.getWakeUpIcon());
+            } else if (hour == preferences.getLaunchTime()) {
+                addIconOverText(col, hour, preferences.getLaunchIcon());
+            } else if (hour == preferences.getDinnerTime()) {
+                addIconOverText(col, hour, preferences.getDinnerIcon());
+            } else if (hour == preferences.getBedTime()) {
+                addIconOverText(col, hour, preferences.getSleepIcon());
+            }
+            col++;
+            if (col > 8) {
+                row += 2;
+                col = 0;
+            }
+        }
+    }
+
+    private void addIconOverText(int col, int hour, Drawable icon) {
+        row--;
+        HourIcon img = new HourIcon(getContext());
+        img.setImageDrawable(icon);
+        LayoutParams imgParams = createLayoutParams(col);
+        addView(img, imgParams);
+        addHourElement(img, hour);
+        row++;
     }
 
 
     private void addRow(int start, int end, Drawable startIcon, Drawable endIcon) {
         if (startIcon != null) {
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams(
-                    GridLayout.spec(row), GridLayout.spec(0));
-            params.width = ICON_SIZE;
-            params.height = ICON_SIZE;
-            ImageView startImg = new ImageView(getContext());
+            HourIcon startImg = new HourIcon(getContext());
             startImg.setImageDrawable(startIcon);
+            LayoutParams params = createLayoutParams(0);
             addView(startImg, params);
             addHourElement(startImg, start);
         }
+
         int col = 1;
         if (end < start) {
             end += 24;
         }
         for (int i = start; i <= end; i++) {
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams(
-                    GridLayout.spec(row), GridLayout.spec(col));
-            params.width = ICON_SIZE;
-            params.height = ICON_SIZE;
-            TextView hour = new TextView(getContext());
-            hour.setText(String.valueOf(i % 24));
-            hour.setTextColor(getResources().getColor(R.color.text_bounds_color,
-                    getContext().getTheme()));
-            hour.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            hour.setPadding(0, 25, 0, 0);
+            LayoutParams params = createLayoutParams(col);
+            HourText hour = new HourText(getContext());
+            hour.updateText(i);
             addView(hour, params);
             addHourElement(hour, i);
             col++;
@@ -179,11 +186,8 @@ public class DayView extends GridLayout {
             }
         }
         if (endIcon != null) {
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams(
-                    GridLayout.spec(row), GridLayout.spec(col));
-            params.width = ICON_SIZE;
-            params.height = ICON_SIZE;
-            ImageView endImg = new ImageView(getContext());
+            LayoutParams params = createLayoutParams(col);
+            HourIcon endImg = new HourIcon(getContext());
             endImg.setImageDrawable(endIcon);
             addView(endImg, params);
             addHourElement(endImg, end);
@@ -192,7 +196,25 @@ public class DayView extends GridLayout {
         row++;
     }
 
-    private void addHourElement(View view, int h) {
+    @NonNull
+    private LayoutParams createLayoutParams(int column) {
+        LayoutParams params = new LayoutParams(
+                GridLayout.spec(row), GridLayout.spec(column));
+        params.width = getIconSize();
+        params.height = getIconSize();
+        return params;
+    }
+
+    private int getIconSize() {
+        // TODO
+//        if (preferences.isDayStructureByFour()) {
+//            return getWidth() / 6;
+//        } else {
+        return ICON_SIZE;
+//        }
+    }
+
+    private void addHourElement(DayViewComponent view, int h) {
         if (!hourElements.containsKey(h)) {
             hourElements.put(h, new ArrayList<>());
         }

@@ -40,10 +40,6 @@ public class Preferences {
         return sharedPreferences.getBoolean("uppercase", true);
     }
 
-    public boolean isDayStructureByFour() {
-        return sharedPreferences.getString("day_structure_type", "1").equals("1");
-    }
-
     /**
      * Get hour from settings.
      *
@@ -102,5 +98,21 @@ public class Preferences {
 
     public Drawable getSunriseIcon() {
         return ResourcesCompat.getDrawable(resources, R.drawable.alba2, theme);
+    }
+
+    public Drawable getD1() {
+        return ResourcesCompat.getDrawable(resources, R.drawable.d1, theme);
+    }
+
+    public Drawable getD2() {
+        return ResourcesCompat.getDrawable(resources, R.drawable.d2, theme);
+    }
+
+    public Drawable getD3() {
+        return ResourcesCompat.getDrawable(resources, R.drawable.d3, theme);
+    }
+
+    public Drawable getD4() {
+        return ResourcesCompat.getDrawable(resources, R.drawable.d4, theme);
     }
 }

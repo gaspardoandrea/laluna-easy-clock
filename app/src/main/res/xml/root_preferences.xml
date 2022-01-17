@@ -38,12 +38,6 @@
     <PreferenceCategory
         app:key="hours"
         app:title="@string/settings_hours">
-    <ListPreference
-        android:defaultValue="true"
-        app:key="day_structure_type"
-        app:entries="@array/day_structure"
-        app:entryValues="@array/day_structure_keys"
-        app:title="@string/day_structure" />
     </PreferenceCategory>
 
     <PreferenceCategory

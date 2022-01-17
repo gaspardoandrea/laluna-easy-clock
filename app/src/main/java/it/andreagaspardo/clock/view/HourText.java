@@ -29,9 +29,9 @@ public class HourText extends androidx.appcompat.widget.AppCompatTextView implem
     private void initComponent() {
         setTextColor(getResources().getColor(R.color.text_bounds_color,
                 getContext().getTheme()));
+        setTextSize(18);
         setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        setPadding(0, 25, 0, 0);
-
+        setPadding(0, 21, 0, 0);
     }
 
     public void updateText(@NonNull Integer hour) {
@@ -40,9 +40,10 @@ public class HourText extends androidx.appcompat.widget.AppCompatTextView implem
 
     @Override
     public void updateStatus(boolean done, boolean current) {
-        setAlpha(done ? 1 : (float) 0.2);
         int bg;
         if (current) {
+            bg = getResources().getColor(R.color.current_section, getContext().getTheme());
+        } else if (done) {
             bg = getResources().getColor(R.color.primary, getContext().getTheme());
         } else {
             bg = getResources().getColor(R.color.bg, getContext().getTheme());

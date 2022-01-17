@@ -25,7 +25,7 @@ public class EasyMinutesView extends View {
     private int height, width = 0;
     private int padding = 0;
     private int fontSize = 0;
-    private int radius = 0;
+    private float radius = 0;
     private Paint paint;
     private boolean isInit;
     private final Rect rect = new Rect();
@@ -33,6 +33,7 @@ public class EasyMinutesView extends View {
     private int fontSizeSmall;
     private HourModel hourModel;
     private Preferences preferences;
+    private float handTruncation = 0;
 
     public EasyMinutesView(Context context) {
         super(context);
@@ -63,7 +64,6 @@ public class EasyMinutesView extends View {
             initClock();
         }
         hourModel.reset();
-        canvas.drawColor(getBgColor());
 
         drawCircle(canvas);
         drawHands(canvas);
@@ -81,8 +81,8 @@ public class EasyMinutesView extends View {
         invalidate();
     }
 
-    private void drawHand(Canvas canvas, int loc) {
-        double angle = 180 * (float) loc / 30 - Math.PI / 2;
+    private void drawHand(Canvas canvas, float loc) {
+        double angle = 180 * loc / 30;
 
         paint.setStyle(Paint.Style.FILL);
         float r = (float) (radius * .9);
@@ -103,6 +103,18 @@ public class EasyMinutesView extends View {
         canvas.drawArc(oval,
                 (float) -90,
                 (float) angle, true, paint);
+        drawHandLine(canvas, loc);
+    }
+
+    private void drawHandLine(Canvas canvas, double loc) {
+        double angle = Math.PI * loc / 30 - Math.PI / 2;
+        float handRadius = radius - handTruncation;
+        paint.setStrokeWidth(10);
+        paint.setColor(getHandColor());
+        canvas.drawLine((int) (width / 2), (int) (height / 2),
+                (float) (width / 2 + Math.cos(angle) * handRadius),
+                (float) (height / 2 + Math.sin(angle) * handRadius),
+                paint);
     }
 
     private void drawHourText(Canvas canvas) {
@@ -179,12 +191,15 @@ public class EasyMinutesView extends View {
         padding = numeralSpacing + 50;
         fontSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 13,
                 getResources().getDisplayMetrics());
-        int min = Math.min(height, width);
+        float min = Math.min(height, width);
         radius = min / 2 - padding;
         paint = new Paint();
 
         fontSizeBig = (int) (height / 4);
         fontSizeSmall = (int) (fontSizeBig / 2.5);
+
+        radius = min / 2 - padding;
+        handTruncation = min / 22;
 
         isInit = true;
     }
@@ -199,5 +214,9 @@ public class EasyMinutesView extends View {
 
     private int getPrimaryColor() {
         return getResources().getColor(R.color.primary, getContext().getTheme());
+    }
+
+    private int getHandColor() {
+        return getResources().getColor(R.color.hand, getContext().getTheme());
     }
 }

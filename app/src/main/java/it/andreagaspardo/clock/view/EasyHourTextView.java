@@ -87,7 +87,7 @@ public class EasyHourTextView extends LinearLayout {
         } else if (hour == preferences.getLaunchTime()) {
             return preferences.getLaunchIcon();
         } else if (hour < preferences.getDinnerTime()) {
-            return preferences.getD3();
+            return preferences.getD4();
         } else if (hour == preferences.getDinnerTime()) {
             return preferences.getDinnerIcon();
         } else if (hour < preferences.getBedTime()) {

@@ -9,6 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/bg"
         android:theme="@style/Theme.EasyToReadClock.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
@@ -24,7 +25,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:gravity="center"
-        android:background="@color/bg"
+        android:background="@color/hours_bg"
         android:orientation="vertical">
 
         <it.andreagaspardo.clock.view.DayView
@@ -34,7 +35,6 @@
             android:layout_height="wrap_content"
             android:background="@color/hours_bg">
         </it.andreagaspardo.clock.view.DayView>
-
         <it.andreagaspardo.clock.view.EasyHourTextView
             android:id="@+id/easyHourTextView"
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 android:paddingEnd="10sp"
                 android:text="@string/hour"
                 android:textAlignment="textEnd"
-                android:textColor="@color/text_bounds_color"
+                android:textColor="@color/text_color"
                 android:textSize="40sp" />
 
             <TextView
@@ -68,11 +68,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/text_bounds_color"
+                android:textColor="@color/text_color"
                 android:textSize="50sp" />
 
         </it.andreagaspardo.clock.view.EasyHourTextView>
-
         <it.andreagaspardo.clock.view.EasyMinutesTextView
             android:id="@+id/easyMinutesTextView"
             android:layout_width="match_parent"
@@ -92,7 +91,7 @@
                 android:paddingEnd="10sp"
                 android:text="@string/minutes"
                 android:textAlignment="textEnd"
-                android:textColor="@color/text_bounds_color"
+                android:textColor="@color/text_color"
                 android:textSize="40sp" />
 
             <TextView
@@ -100,11 +99,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/text_bounds_color"
+                android:textColor="@color/text_color"
                 android:textSize="50sp" />
 
         </it.andreagaspardo.clock.view.EasyMinutesTextView>
-
         <it.andreagaspardo.clock.view.EasyMinutesView
             android:id="@+id/easyMinutesView"
             android:layout_width="match_parent"
@@ -116,7 +114,7 @@
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="match_parent"
-            android:layout_height="15sp"
+            android:layout_height="5sp"
             android:background="@color/minutes_bg" />
 
     </LinearLayout>

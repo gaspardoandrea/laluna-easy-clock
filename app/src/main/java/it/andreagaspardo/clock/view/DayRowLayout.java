@@ -39,7 +39,7 @@ public class DayRowLayout extends GridLayout {
             setBackgroundColor(getResources().getColor(R.color.current_section,
                     getContext().getTheme()));
         } else {
-            setBackgroundColor(getResources().getColor(R.color.bg,
+            setBackgroundColor(getResources().getColor(R.color.hours_bg,
                     getContext().getTheme()));
         }
     }

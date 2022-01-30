@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import it.andreagaspardo.clock.R;
 import it.andreagaspardo.clock.model.Helper;
 import it.andreagaspardo.clock.model.HourModel;
 import it.andreagaspardo.clock.model.Preferences;
@@ -50,10 +49,8 @@ public class DayView extends GridLayout {
         if (added) {
             return;
         }
-        setBackgroundColor(getResources().getColor(R.color.bg,
-                getContext().getTheme()));
         preferences = new Preferences(getContext());
-        addAllComponents();
+        addComponents();
         android.view.ViewGroup.LayoutParams params = getLayoutParams();
         setLayoutParams(params);
         hourModel = new HourModel(Helper.getCurrentLocale(getContext()));
@@ -75,12 +72,8 @@ public class DayView extends GridLayout {
         int now = hourModel.getHour();
 
         if (currentHour == null || !currentHour.equals(now)) {
-            int start = preferences.getWakeUpTime();
             for (Map.Entry<Integer, List<DayViewComponent>> entry : hourElements.entrySet()) {
                 int k = entry.getKey();
-                if (now < start) {
-                    now += 24;
-                }
                 boolean isDone = k <= now;
                 boolean current = k == now;
                 for (DayViewComponent v : entry.getValue()) {
@@ -100,7 +93,7 @@ public class DayView extends GridLayout {
         addChildren();
     }
 
-    private void addAllComponents() {
+    private void addComponents() {
         int col = 0;
         int row = 0;
         DayRowLayout current = null;

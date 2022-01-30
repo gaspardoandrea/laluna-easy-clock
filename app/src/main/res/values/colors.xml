@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="text_bounds_color">#1E252B</color>
+    <color name="text_color">#1E252B</color>
+    <color name="text_bounds_color">#48525A</color>
     <color name="primary">#2196F3</color>
     <color name="bg">#eeeeee</color>
+    <color name="quadrants">#ffffff</color>
 
     <color name="hours_bg">#fff548</color>
+    <color name="hours_bg_light">#f7f7f7</color>
     <color name="minutes_bg">#9bd8eb</color>
     <color name="hand">#4ce080</color>
     <color name="current_section">#4fe17c</color>

@@ -27,7 +27,7 @@ public class HourText extends androidx.appcompat.widget.AppCompatTextView implem
     }
 
     private void initComponent() {
-        setTextColor(getResources().getColor(R.color.text_bounds_color,
+        setTextColor(getResources().getColor(R.color.text_color,
                 getContext().getTheme()));
         setTextSize(18);
         setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -46,7 +46,7 @@ public class HourText extends androidx.appcompat.widget.AppCompatTextView implem
         } else if (done) {
             bg = getResources().getColor(R.color.primary, getContext().getTheme());
         } else {
-            bg = getResources().getColor(R.color.bg, getContext().getTheme());
+            bg = getResources().getColor(R.color.hours_bg_light, getContext().getTheme());
         }
 
         setBackgroundColor(bg);
